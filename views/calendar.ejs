@@ -1,0 +1,15 @@
+<div class="container">
+  <ez-calendar
+    lang="<%= locals?.tenant?.preferences?.lang || 'en-gb' %>"
+  ></ez-calendar>
+</div>
+
+<%- contentFor('scripts') %>
+<script type="module" src="/scripts/calendar.js" defer></script>
+
+<%- contentFor('styles') %>
+<style>
+  .container {
+    padding: 1rem;
+  }
+</style>

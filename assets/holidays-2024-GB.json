@@ -1,0 +1,467 @@
+[
+  {
+    "date": "2024-01-01T00:00:00.000Z",
+    "description": "New Year's Day",
+    "type": "Bank Holiday"
+  },
+  {
+    "date": "2024-01-02T00:00:00.000Z",
+    "description": "2nd January",
+    "type": "Local Bank Holiday"
+  },
+  {
+    "date": "2024-01-05T00:00:00.000Z",
+    "description": "Twelfth Night",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-01-06T00:00:00.000Z",
+    "description": "Epiphany",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-01-07T00:00:00.000Z",
+    "description": "Orthodox Christmas Day",
+    "type": "Observance, Orthodox"
+  },
+  {
+    "date": "2024-01-14T00:00:00.000Z",
+    "description": "Orthodox New Year",
+    "type": "Observance, Orthodox"
+  },
+  {
+    "date": "2024-01-25T00:00:00.000Z",
+    "description": "Tu B'Shevat (Arbor Day)",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-01-25T00:00:00.000Z",
+    "description": "Burns Night",
+    "type": "Local Observation"
+  },
+  {
+    "date": "2024-02-07T00:00:00.000Z",
+    "description": "Isra and Mi'raj",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-02-10T00:00:00.000Z",
+    "description": "Lunar New Year",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-02-13T00:00:00.000Z",
+    "description": "Carnival / Shrove Tuesday / Pancake Day",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-02-14T00:00:00.000Z",
+    "description": "Carnival / Ash Wednesday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-02-14T00:00:00.000Z",
+    "description": "Valentine's Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-03-01T00:00:00.000Z",
+    "description": "St. David's Day",
+    "type": "Local Observation"
+  },
+  {
+    "date": "2024-03-08T00:00:00.000Z",
+    "description": "Maha Shivaratri",
+    "type": "Hindu Holiday"
+  },
+  {
+    "date": "2024-03-10T00:00:00.000Z",
+    "description": "Mother's Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-03-11T00:00:00.000Z",
+    "description": "Ramadan Start (Tentative Date)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-03-17T00:00:00.000Z",
+    "description": "St Patrick's Day",
+    "type": "Local Bank Holiday"
+  },
+  {
+    "date": "2024-03-18T00:00:00.000Z",
+    "description": "Day off for St Patrick's Day",
+    "type": "Local Bank Holiday"
+  },
+  {
+    "date": "2024-03-20T03:06:28.000Z",
+    "description": "March Equinox",
+    "type": "Season"
+  },
+  {
+    "date": "2024-03-24T00:00:00.000Z",
+    "description": "Palm Sunday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-03-24T00:00:00.000Z",
+    "description": "Purim",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-03-28T00:00:00.000Z",
+    "description": "Maundy Thursday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-03-29T00:00:00.000Z",
+    "description": "Good Friday",
+    "type": "Bank Holiday"
+  },
+  {
+    "date": "2024-03-30T00:00:00.000Z",
+    "description": "Holy Saturday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-03-31T00:00:00.000Z",
+    "description": "Easter Sunday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-03-31T01:00:00.000Z",
+    "description": "Daylight Saving Time starts",
+    "type": "Clock change/Daylight Saving Time"
+  },
+  {
+    "date": "2024-04-01T00:00:00.000Z",
+    "description": "Easter Monday",
+    "type": "Common Local Holiday"
+  },
+  {
+    "date": "2024-04-01T00:00:00.000Z",
+    "description": "Easter Monday",
+    "type": "Local Observation"
+  },
+  {
+    "date": "2024-04-05T00:00:00.000Z",
+    "description": "Laylatul Qadr (Night of Power)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-04-10T00:00:00.000Z",
+    "description": "Eid ul Fitr (Tentative Date)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-04-22T00:00:00.000Z",
+    "description": "Stephen Lawrence Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-04-23T00:00:00.000Z",
+    "description": "First day of Passover",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-04-23T00:00:00.000Z",
+    "description": "St. George's Day",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-04-23T00:00:00.000Z",
+    "description": "St. George's Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-04-23T00:00:00.000Z",
+    "description": "Shakespeare Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-04-30T00:00:00.000Z",
+    "description": "Last day of Passover",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-05-03T00:00:00.000Z",
+    "description": "Orthodox Good Friday",
+    "type": "Observance, Orthodox"
+  },
+  {
+    "date": "2024-05-04T00:00:00.000Z",
+    "description": "Orthodox Holy Saturday",
+    "type": "Observance, Orthodox"
+  },
+  {
+    "date": "2024-05-05T00:00:00.000Z",
+    "description": "Yom HaShoah",
+    "type": "Jewish Commemoration"
+  },
+  {
+    "date": "2024-05-05T00:00:00.000Z",
+    "description": "Orthodox Easter",
+    "type": "Observance, Orthodox"
+  },
+  {
+    "date": "2024-05-06T00:00:00.000Z",
+    "description": "Orthodox Easter Monday",
+    "type": "Observance, Orthodox"
+  },
+  {
+    "date": "2024-05-06T00:00:00.000Z",
+    "description": "Early May Bank Holiday",
+    "type": "Bank Holiday"
+  },
+  {
+    "date": "2024-05-09T00:00:00.000Z",
+    "description": "Ascension Day",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-05-14T00:00:00.000Z",
+    "description": "Yom HaAtzmaut",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-05-19T00:00:00.000Z",
+    "description": "Pentecost",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-05-20T00:00:00.000Z",
+    "description": "Whit Monday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-05-26T00:00:00.000Z",
+    "description": "Trinity Sunday",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-05-26T00:00:00.000Z",
+    "description": "Lag B'Omer",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-05-27T00:00:00.000Z",
+    "description": "Spring Bank Holiday",
+    "type": "Bank Holiday"
+  },
+  {
+    "date": "2024-05-30T00:00:00.000Z",
+    "description": "Corpus Christi",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-06-12T00:00:00.000Z",
+    "description": "Shavuot",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-06-15T00:00:00.000Z",
+    "description": "King's Birthday",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-06-16T00:00:00.000Z",
+    "description": "Father's Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-06-17T00:00:00.000Z",
+    "description": "Eid al-Adha (Tentative Date)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-06-20T21:50:59.000Z",
+    "description": "June Solstice",
+    "type": "Season"
+  },
+  {
+    "date": "2024-06-22T00:00:00.000Z",
+    "description": "Windrush Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-07-08T00:00:00.000Z",
+    "description": "Muharram/Islamic New Year (Tentative Date)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-07-12T00:00:00.000Z",
+    "description": "Battle of the Boyne",
+    "type": "Local Bank Holiday"
+  },
+  {
+    "date": "2024-07-17T00:00:00.000Z",
+    "description": "Ashura (Tentative Date)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-08-05T00:00:00.000Z",
+    "description": "Summer Bank Holiday",
+    "type": "Common Local Holiday"
+  },
+  {
+    "date": "2024-08-13T00:00:00.000Z",
+    "description": "Tisha B'Av",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-08-15T00:00:00.000Z",
+    "description": "Assumption of Mary",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-08-26T00:00:00.000Z",
+    "description": "Janmashtami (Smarta)",
+    "type": "Hindu Holiday"
+  },
+  {
+    "date": "2024-08-26T00:00:00.000Z",
+    "description": "Janmashtami",
+    "type": "Hindu Holiday"
+  },
+  {
+    "date": "2024-08-26T00:00:00.000Z",
+    "description": "Summer Bank Holiday",
+    "type": "Common Local Holiday"
+  },
+  {
+    "date": "2024-09-06T00:00:00.000Z",
+    "description": "Ganesh Chaturthi",
+    "type": "Hindu Holiday"
+  },
+  {
+    "date": "2024-09-16T00:00:00.000Z",
+    "description": "Milad un Nabi (Mawlid) (Tentative Date)",
+    "type": "Muslim"
+  },
+  {
+    "date": "2024-09-22T13:43:33.000Z",
+    "description": "September Equinox",
+    "type": "Season"
+  },
+  {
+    "date": "2024-10-03T00:00:00.000Z",
+    "description": "Rosh Hashana",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-10-04T00:00:00.000Z",
+    "description": "Feast of St Francis of Assisi",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-10-12T00:00:00.000Z",
+    "description": "Yom Kippur",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-10-17T00:00:00.000Z",
+    "description": "First day of Sukkot",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-10-23T00:00:00.000Z",
+    "description": "Hoshana Rabbah",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-10-24T00:00:00.000Z",
+    "description": "Shemini Atzeret",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-10-25T00:00:00.000Z",
+    "description": "Simchat Torah",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-10-27T02:00:00.000Z",
+    "description": "Daylight Saving Time ends",
+    "type": "Clock change/Daylight Saving Time"
+  },
+  {
+    "date": "2024-10-31T00:00:00.000Z",
+    "description": "Halloween",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-11-01T00:00:00.000Z",
+    "description": "All Saints' Day",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-11-01T00:00:00.000Z",
+    "description": "Diwali/Deepavali",
+    "type": "Hindu Holiday"
+  },
+  {
+    "date": "2024-11-02T00:00:00.000Z",
+    "description": "All Souls' Day",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-11-05T00:00:00.000Z",
+    "description": "Guy Fawkes Day",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-11-10T00:00:00.000Z",
+    "description": "Remembrance Sunday",
+    "type": "Observance"
+  },
+  {
+    "date": "2024-11-30T00:00:00.000Z",
+    "description": "St Andrew's Day",
+    "type": "Local Bank Holiday"
+  },
+  {
+    "date": "2024-12-01T00:00:00.000Z",
+    "description": "First Sunday of Advent",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-12-02T00:00:00.000Z",
+    "description": "St Andrew's Day observed",
+    "type": "Local Bank Holiday"
+  },
+  {
+    "date": "2024-12-08T00:00:00.000Z",
+    "description": "Feast of the Immaculate Conception",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-12-21T09:20:34.000Z",
+    "description": "December Solstice",
+    "type": "Season"
+  },
+  {
+    "date": "2024-12-24T00:00:00.000Z",
+    "description": "Christmas Eve",
+    "type": "Observance, Christian"
+  },
+  {
+    "date": "2024-12-25T00:00:00.000Z",
+    "description": "Christmas Day",
+    "type": "Bank Holiday"
+  },
+  {
+    "date": "2024-12-26T00:00:00.000Z",
+    "description": "First Day of Hanukkah",
+    "type": "Jewish Holiday"
+  },
+  {
+    "date": "2024-12-26T00:00:00.000Z",
+    "description": "Boxing Day",
+    "type": "Bank Holiday"
+  },
+  {
+    "date": "2024-12-31T00:00:00.000Z",
+    "description": "New Year's Eve",
+    "type": "Observance"
+  }
+]

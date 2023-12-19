@@ -1,0 +1,23 @@
+<header class="app-header">
+  <section>
+    <i class="mdi">receipt</i>&nbsp;ez<strong>Invoice</strong>&nbsp;<sup
+      ><%= locals?.version || 'N/A' %></sup
+    >
+  </section>
+  <section
+    style="
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+    "
+  >
+    <sl-tooltip content="<%= locals?.tenant?.name || 'Unidentified' %>"
+      ><a href="/profile"
+        ><sl-avatar image="<%= locals?.user?.picture %>"></sl-avatar></a
+    ></sl-tooltip>
+    <sl-tooltip content="Sign out"
+      ><a href="/signout"><i class="mdi">exit_to_app</i></a></sl-tooltip
+    >
+  </section>
+</header>

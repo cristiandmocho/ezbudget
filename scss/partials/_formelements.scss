@@ -1,0 +1,9 @@
+@mixin form-element() {
+  padding: 4px 8px;
+  border: var(--sl-input-border-width) solid var(--sl-input-border-color);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border,
+    var(--sl-transition-fast) box-shadow,
+    var(--sl-transition-fast) background-color;
+}

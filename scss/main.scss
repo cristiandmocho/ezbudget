@@ -1,0 +1,61 @@
+@use "partials/reset";
+@use "partials/elevation";
+@use "partials/typography";
+@use "partials/formelements";
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+template {
+  display: none;
+  position: absolute;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+
+  font-family: var(--md-sys-typescale-body-medium-font-family-name),
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode",
+    Geneva, Verdana, sans-serif;
+  font-style: var(--md-sys-typescale-body-medium-font-family-style);
+  font-weight: var(--md-sys-typescale-body-medium-font-weight);
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+  letter-spacing: var(--md-sys-typescale-body-medium-letter-spacing);
+
+  color: var(--sl-color-primary-950);
+  background-color: var(--sl-panel-background-color);
+}
+
+.app {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+
+  .main-content {
+    display: grid;
+    grid-template-columns: min-content auto;
+    overflow: hidden;
+
+    .content {
+      padding: 1rem;
+      overflow: hidden;
+    }
+  }
+
+  & > footer {
+    padding: 0.6rem;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    border-top: solid 2px var(--sl-color-neutral-100);
+    background-color: var(--sl-color-neutral-100);
+  }
+}
+
+@import "components/navbar";
+@import "components/header";
+@import "components/toasts";

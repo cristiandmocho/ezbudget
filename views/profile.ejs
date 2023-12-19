@@ -1,0 +1,77 @@
+<div class="content">
+  <h1>Tenant Profile</h1>
+  <hr />
+  <section class="content">
+    <form>
+      <div class="columns">
+        <div class="col">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" />
+          </div>
+          <div class="form-group">
+            <label>VAT No.</label>
+            <input type="text" name="vat_no" />
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" />
+          </div>
+          <div class="form-group">
+            <label>Created Date</label>
+            <input type="date" name="created" readonly disabled />
+          </div>
+          <div class="form-group">
+            <label>Currency</label>
+            <input
+              type="text"
+              name="currency"
+              placeholder="Currency code. Ex.: EUR"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" name="email" readonly disabled />
+          </div>
+          <div class="form-group">
+            <label>Theme</label>
+            <select name="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Language</label>
+            <input
+              type="text"
+              name="language"
+              placeholder="Culture code. Ex.: en-gb"
+            />
+          </div>
+          <div class="form-group">
+            <label>company_name</label>
+            <input type="text" name="company_name" />
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label>company_address</label>
+        <textarea name="company_address" rows="3"></textarea>
+      </div>
+    </form>
+  </section>
+  <section class="buttons">
+    <sl-button name="btnSave" variant="primary">Save</sl-button>
+    <sl-button name="btnCancel">Cancel</sl-button>
+    <sl-button name="btnDelete" variant="danger">Delete</sl-button>
+  </section>
+</div>
+
+<%- contentFor('scripts') %>
+<script type="module" src="/scripts/profile.js" defer></script>
+
+<%- contentFor('styles') %>
+<link rel="stylesheet" href="/css/views/dashboard.css" />

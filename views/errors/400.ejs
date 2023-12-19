@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="<%= locals?.tenant?.preferences?.lang || 'en-gb' %>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ezInvoice 2 - <%= title %></title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+
+      body {
+        font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        gap: 1rem;
+        background-color: #292929;
+        color: aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>400 | Bad Request</h2>
+    <p><%= error.message %></p>
+  </body>
+</html>

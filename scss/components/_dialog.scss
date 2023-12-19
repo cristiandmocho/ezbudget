@@ -1,0 +1,123 @@
+@use "../partials/formelements" as *;
+
+.ez-dialog {
+  position: absolute;
+  display: grid;
+  grid-template-rows: auto min-content;
+  gap: 8px;
+}
+
+section.content {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 16px;
+
+  .columns {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 8px;
+
+    .col {
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+  }
+
+  .form-group {
+    display: grid;
+    gap: 3px;
+    align-items: center;
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="date"],
+    textarea,
+    select {
+      @include form-element();
+    }
+  }
+
+  .checkbox {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 3px;
+
+    input[type="checkbox"] {
+      margin: 6px 0 7px 0;
+    }
+
+    .form-group {
+      align-content: start;
+      justify-content: start;
+      grid-auto-flow: column;
+    }
+  }
+
+  .col {
+    display: grid;
+  }
+
+  table {
+    th {
+      padding: 2px 8px;
+      background-color: var(--sl-color-primary-100);
+
+      &:nth-child(6) {
+        background-color: transparent;
+      }
+
+      &:nth-child(1) {
+        border-radius: 6px 0 0 0;
+      }
+
+      &:nth-child(5) {
+        border-radius: 0 6px 0 0;
+      }
+    }
+
+    td {
+      padding: 2px;
+    }
+
+    td i {
+      position: absolute;
+      margin-top: 1px;
+      cursor: pointer;
+    }
+
+    th i {
+      margin-left: -11px;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    input[type="number"] {
+      width: 95px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 350px;
+    }
+
+    tfoot {
+      td {
+        padding: 0.33rem 1rem;
+        background-color: var(--surface-c);
+        font-style: italic;
+      }
+    }
+  }
+
+  hr {
+    width: 100%;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+}

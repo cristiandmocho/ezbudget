@@ -1,0 +1,39 @@
+{
+  "name": "ezbudget",
+  "version": "0.0.1",
+  "description": "ezBudget",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "scss-compile": "sass --no-source-map --update scss/:public/css/ --watch",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "author": {
+    "email": "cristian.mocho@ezsystems.net",
+    "name": "Cristian Mocho"
+  },
+  "license": "MIT",
+  "nodemonConfig": {
+    "ignore": [
+      "./public"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "grunt": "^1.6.1",
+    "sass": "^1.69.5"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express-openid-connect": "^2.17.1",
+    "helmet": "^7.1.0",
+    "lru-cache": "^10.1.0"
+  }
+}
