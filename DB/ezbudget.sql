@@ -16,6 +16,61 @@ create table tenants (
   primary key (uid)
 );
 
+create table expenses (
+  uid varchar(36) not null default (UUID()),
+  tenant_uid varchar(36) not null,
+  title varchar(250) not null,
+  description text default null,
+  category varchar(36) not null,
+  subcategory varchar(36) not null,
+  amount float not null,
+  currency varchar(3) not null,
+  recurring char(1) not null default 'N' comment '(Y)es, (N)o',
+  recur_type tinyint not null default 0 comment '0: None, 1: Monthly, 2: Quarterly, 3: Semi-annual, 4: Yearly',
+  created timestamp not null default (UTC_TIMESTAMP),
+  paid timestamp default null,
+  due_date timestamp default null,
+  primary key (uid)
+);
+
+create table incomes (
+  uid varchar(36) not null default (UUID()),
+  tenant_uid varchar(36) not null,
+  title varchar(250) not null,
+  description text default null,
+  category varchar(36) not null,
+  subcategory varchar(36) not null,
+  amount float not null,
+  currency varchar(3) not null,
+  recurring char(1) not null default 'N' comment '(Y)es, (N)o',
+  recur_type tinyint not null default 0 comment '0: None, 1: Monthly, 2: Quarterly, 3: Semi-annual, 4: Yearly',
+  created timestamp not null default (UTC_TIMESTAMP),
+  paid timestamp default null,
+  due_date timestamp default null,
+  primary key (uid)
+);
+
+
+create table categories (
+  uid varchar(36) not null default (UUID()),
+  tenant_uid varchar(36) not null,
+  name varchar(50) not null,
+  description text default null,
+  sort_order int(10) not null default 0,
+  primary key (uid)
+);
+
+create table subcategories (
+  uid varchar(36) not null default (UUID()),
+  tenant_uid varchar(36) not null,
+  category_uid varchar(36) not null,
+  name varchar(50) not null,
+  description text default null,
+  sort_order int(10) not null default 0,
+  primary key (uid)
+);
+
+
 create table files (
   uid varchar(36) not null default (UUID()),
   file_name varchar(150) not null,
@@ -33,46 +88,26 @@ create table files (
 create table doc_types (
   id tinyint not null auto_increment,
   name varchar(30) not null,
+  tenant_uid varchar(36) default null,
   primary key (id)
 );
 
 create table calendar_info (
   uid varchar(36) not null default (UUID()),
-  work_date timestamp not null,
-  work_start timestamp default null,
-  work_end timestamp default null,
-  work_details text default null,
-  customer_uid varchar(36) not null,
-  primary key (uid),
-  constraint uc_calendar unique (work_date, customer_uid)
+  event_date timestamp not null,
+  event_start timestamp default null,
+  event_end timestamp default null,
+  event_details text default null,
+  event_color varchar(7) default null,
+  tenant_uid varchar(36) not null,
+  primary key (uid)
 );
 
 insert into doc_types (name)
-values ('Other documents'), ('Company constitution'), ('Address proof'), ('Bank details'), ('Customer contract'), ('Service provider contract');
-
-drop view if exists vw_calendar_info;
-
-create view vw_calendar_info as
-select
-  ci.work_date,
-  ci.work_start,
-  ci.work_end,
-  ci.work_details,
-  ci.customer_uid,
-  cu.name,
-  cu.color,
-  cu.type,
-  cu.tenant_uid
-from calendar_info ci
-  inner join customers cu on ci.customer_uid = cu.uid
-order by
-  cu.name,
-  ci.work_date,
-  ci.work_start;
+values ('Other documents'), ('Income - Invoice'), ('Expense - Invoice'), ('Expense - Receit'), ('Expense - Other');
 
 drop trigger if exists tr_after_delete_tenant;
 
-drop procedure if exists sp_add_calendar_info;
 drop procedure if exists sp_add_tenant;
 
 delimiter //
@@ -80,18 +115,14 @@ delimiter //
 create trigger tr_after_delete_tenant after delete on tenants for each row
   begin
     delete from files fi where fi.tenant_uid = old.uid;
+    delete from calendar_info ci where ci.tenant_uid = old.uid;
+    delete from expenses ex where ex.tenant_uid = old.uid;
+    delete from incomes ic where ic.tenant_uid = old.uid;
+    delete from doc_types dt where dt.tenant_uid = old.uid;
+    delete from categories ct where ct.tenant_uid = old.uid;
+    delete from subcategories sb where sb.tenant_uid = old.uid;
   end;
 //
-
-create procedure sp_add_calendar_info (in work_date date, in customer_uid varchar(36))
-  begin
-    set @uid = UUID();
-    
-    insert into calendar_info (uid, work_date, customer_uid) values (@uid, work_date, customer_uid);
-
-    select @uid;
-
-  end//
 
 create procedure sp_add_tenant (
   in auth0_uid varchar(100),
