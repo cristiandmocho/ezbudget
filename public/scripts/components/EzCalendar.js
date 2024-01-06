@@ -27,6 +27,9 @@ export default class ezCalendar extends HTMLElement {
   // Build the table data
   refreshTableData = () => {
     const calendar = this.shadowRoot.querySelector(".ez-calendar");
+
+    if (!calendar) return;
+
     const table = calendar.querySelector(".table");
     const tableBody = table.querySelector(".tbody");
 
@@ -65,12 +68,35 @@ export default class ezCalendar extends HTMLElement {
 
   render() {
     this.shadowRoot.innerHTML = `
+      <style>
+        .mdi {
+          font-family: "Material Symbols Rounded";
+          font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+          font-size: 1.2rem;
+          font-display: swap;
+          display: inline-block;
+        }
+        .mdi.medium {
+          font-size: 1.7rem;
+        }
+        .mdi.large {
+          font-size: 2.3rem;
+        }
+        .mdi.spin {
+          animation: spin 2s linear infinite;
+        }
+      </style>
       <link rel="stylesheet" href="/css/components/calendar.css" />
       <div class="ez-calendar">
         <div class="toolbar">
+          <sl-tooltip content="Previous Month">
+            <i class="mdi" name="prev">chevron_left</i>
+          </sl-tooltip>
           <select name="month" class="form-element"></select>
+          <sl-tooltip content="Next Month">
+            <i class="mdi" name="next">chevron_right</i>
+          </sl-tooltip>
           <input type="number" class="form-element" name="year" placeholder="Year" min="1970" max="2999" value="${this.selectedDate.getFullYear()}" />
-          <select name="customer" class="form-element"></select>
         </div>
         <div class="table">
           <div class="thead"></div>
@@ -86,8 +112,9 @@ export default class ezCalendar extends HTMLElement {
     const tableBody = table.querySelector(".tbody");
     const monthSelect = toolbar.querySelector("select[name=month]");
     const yearInput = toolbar.querySelector("input[name=year]");
-    const customerSelect = toolbar.querySelector("select[name=customer]");
     const weekDayNames = getWeekdayNames(this.lang, "short");
+    const nextMonth = toolbar.querySelector("[name=next]");
+    const prevMonth = toolbar.querySelector("[name=prev]");
 
     // Defining local auxiliary functions
     const calculateCalendarDates = () => {
@@ -165,11 +192,8 @@ export default class ezCalendar extends HTMLElement {
           );
 
           if (holiday) {
-            const badge = document.createElement("sl-badge");
-            badge.innerText = holiday.description;
-            badge.type = "info";
-            badge.classList.add("holiday");
-            div.appendChild(badge);
+            div.setAttribute("title", holiday.description);
+            div.classList.add("holiday");
           }
         }
       }
@@ -194,26 +218,6 @@ export default class ezCalendar extends HTMLElement {
 
     // Build the year input
     yearInput.value = this.selectedDate.getFullYear();
-
-    // Build the customer select
-    customerSelect.innerHTML = "";
-
-    const option = document.createElement("option");
-    option.value = "";
-    option.disabled = true;
-    option.selected = true;
-    option.innerText = "-- Please select --";
-    customerSelect.appendChild(option);
-
-    this.customerData.forEach((customer) => {
-      const option = document.createElement("option");
-      option.value = customer.uid;
-      option.innerText = customer.name;
-
-      if (customer.uid === this.selectedCustomer?.uid) option.selected = true;
-
-      customerSelect.appendChild(option);
-    });
 
     // Events
     tableBody.addEventListener("click", (e) => {
@@ -270,25 +274,77 @@ export default class ezCalendar extends HTMLElement {
       );
     });
 
-    customerSelect.addEventListener("change", (e) => {
-      this.selectedCustomer = this.customerData.find(
-        (row) => row.uid === e.target.value
-      );
+    nextMonth.addEventListener("click", () => {
+      let month = this.selectedDate.getMonth();
+
+      month++;
+
+      if (month > 11) {
+        month = 0;
+        this.selectedDate.setFullYear(this.selectedDate.getFullYear() + 1);
+
+        this.dispatchEvent(
+          new CustomEvent("yearchange", {
+            detail: {
+              year: this.selectedDate.getFullYear(),
+            },
+          })
+        );
+
+        yearInput.value = this.selectedDate.getFullYear();
+      }
+
+      this.selectedDate.setMonth(month);
 
       this.dispatchEvent(
-        new CustomEvent("customerchange", {
+        new CustomEvent("monthchange", {
           detail: {
-            customer_uid: e.target.value,
+            month: this.selectedDate.getMonth(),
           },
         })
       );
+
+      monthSelect.value = this.selectedDate.getMonth();
+
+      refresh();
+    });
+
+    prevMonth.addEventListener("click", () => {
+      let month = this.selectedDate.getMonth();
+
+      month--;
+
+      if (month < 0) {
+        month = 11;
+        this.selectedDate.setFullYear(this.selectedDate.getFullYear() - 1);
+
+        this.dispatchEvent(
+          new CustomEvent("yearchange", {
+            detail: {
+              year: this.selectedDate.getFullYear(),
+            },
+          })
+        );
+
+        yearInput.value = this.selectedDate.getFullYear();
+      }
+
+      this.selectedDate.setMonth(month);
+
+      this.dispatchEvent(
+        new CustomEvent("monthchange", {
+          detail: {
+            month: this.selectedDate.getMonth(),
+          },
+        })
+      );
+
+      monthSelect.value = this.selectedDate.getMonth();
+
+      refresh();
     });
 
     refresh();
-  }
-
-  setCustomerData(customers) {
-    this.customerData = customers;
   }
 
   setCalendarData(calendar) {
