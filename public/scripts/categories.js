@@ -1,8 +1,15 @@
-import { fillForm, showToast } from "../../utils/utilities.js";
+import {
+  fillForm,
+  clearForm,
+  showToast,
+  readForm,
+  showConfirmDialog,
+} from "../../utils/utilities.js";
 
 (async () => {
   let tableData = [];
   let selectedRow = null;
+  let dirty = false;
 
   const dataRow = (row) => {
     return `
@@ -10,7 +17,7 @@ import { fillForm, showToast } from "../../utils/utilities.js";
         <td><span>${formatColumn("name", row)}</span></td>
         <td><span>${formatColumn("color", row)}</span></td>
         <td><span>${formatColumn("description", row)}</span></td>
-        <td><span>${formatColumn("order", row)}</span></td>
+        <td><span>${formatColumn("sort_order", row)}</span></td>
       </tr>`;
   };
 
@@ -57,7 +64,7 @@ import { fillForm, showToast } from "../../utils/utilities.js";
         return `<span style="background-color: ${row[key]}; width: 20px; height: 20px; display: inline-block; border: solid 1px #eee"></span>`;
 
       default:
-        return row[key] ?? "";
+        return row[key] == null ? "" : row[key].toString();
     }
   }
 
@@ -80,6 +87,27 @@ import { fillForm, showToast } from "../../utils/utilities.js";
     } catch (e) {
       showToast(
         `Failed to load data. ${e.message}`,
+        "Error",
+        "danger",
+        "cancel"
+      );
+    }
+  }
+
+  async function saveCategory(row) {
+    try {
+      await fetch(`/api/category`, {
+        method: "POST",
+        body: JSON.stringify(row),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      showToast(`Data successfully saved`, "Success", "success", "check");
+
+      loadTableData();
+    } catch (err) {
+      showToast(
+        `Failed to save data. ${err.message}`,
         "Error",
         "danger",
         "cancel"
@@ -139,6 +167,8 @@ import { fillForm, showToast } from "../../utils/utilities.js";
 
     switch (btn) {
       case "new":
+        clearForm(form);
+        form.querySelector("input").focus();
         break;
 
       case "delete": {
@@ -158,7 +188,64 @@ import { fillForm, showToast } from "../../utils/utilities.js";
         break;
 
       default:
-        showToast("Not implemented yet");
+        showToast(`Not implemented yet: ${btn}`);
+        break;
+    }
+  }
+
+  function pageButtonClickHandler(e) {
+    const btn = e.target.closest("sl-button").getAttribute("name");
+
+    async function saveData() {
+      if (dirty) {
+        if (selectedRow) {
+          const row = readForm(form);
+          row.uid = selectedRow.uid;
+
+          await updateCategory(row);
+        } else {
+          const row = readForm(form);
+          await saveCategory(row);
+        }
+      }
+
+      dirty = false;
+      selectedRow = null;
+
+      clearForm(form);
+      form.querySelector("input").focus();
+    }
+
+    switch (btn) {
+      case "btnSave":
+        saveData();
+        break;
+
+      case "btnSaveClose": {
+        saveData();
+        location.assign("/dashboard");
+
+        break;
+      }
+
+      case "btnClose":
+        if (dirty) {
+          const confirm = showConfirmDialog({
+            title: "Discard Changes",
+            message:
+              "You have unsaved changes. Are you sure you want to discard them?",
+          });
+
+          confirm.addEventListener("confirm", () => {
+            location.assign("/dashboard");
+          });
+        } else {
+          location.assign("/dashboard");
+        }
+        break;
+
+      default:
+        showToast(`Not implemented yet: ${btn}`);
         break;
     }
   }
@@ -178,4 +265,12 @@ import { fillForm, showToast } from "../../utils/utilities.js";
   document
     .querySelector(".toolbar")
     .addEventListener("click", toolbarButtonClickHandler);
+
+  document
+    .querySelector(".buttons")
+    .addEventListener("click", pageButtonClickHandler);
+
+  form.addEventListener("change", (e) => {
+    dirty = true;
+  });
 })();

@@ -261,3 +261,42 @@ export const fillForm = (form, data) => {
     }
   });
 };
+
+/**
+ * Clears the values of all inputs in a form
+ *
+ * @param {HTMLFormElement} form - The form to clear
+ */
+export const clearForm = (form) => {
+  const inputs = form.querySelectorAll("input, textarea, select");
+
+  inputs.forEach((input) => {
+    if (input.type === "checkbox" || input.type === "radio") {
+      input.checked = false;
+    } else if (input.type === "number") {
+      input.value = 0;
+    } else {
+      input.value = "";
+    }
+  });
+};
+
+/**
+ * Reads all values from a form and returns an object
+ *
+ * @param {HTMLFormElement} form - The form element to read from
+ * @returns {Object} - Object with all form values
+ */
+export const readForm = (form) => {
+  const data = {};
+
+  const inputs = form.querySelectorAll("input, textarea, select");
+
+  inputs.forEach((input) => {
+    if (input.name) {
+      data[input.name] = input.value;
+    }
+  });
+
+  return data;
+};
