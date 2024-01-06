@@ -131,7 +131,7 @@ class Server {
   routes() {
     // Static routes
     this.server.use("/scripts", express.static("public/scripts"));
-    this.server.use("/scripts/utils", express.static("utils"));
+    this.server.use("/utils", express.static("utils"));
     this.server.use("/css", express.static("public/css"));
     this.server.use("/assets", express.static("assets"));
 
