@@ -1,0 +1,13 @@
+@import "../partials/formelements";
+@import "../components/tablesection";
+
+.content {
+  padding: 1rem;
+  display: grid;
+  grid-template-rows: min-content min-content min-content auto min-content;
+  gap: 4px;
+
+  hr {
+    width: 100%;
+  }
+}

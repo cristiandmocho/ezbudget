@@ -1,9 +1,61 @@
 @mixin form-element() {
   padding: 4px 8px;
+  min-height: 29px;
   border: var(--sl-input-border-width) solid var(--sl-input-border-color);
   border-radius: var(--sl-input-border-radius-medium);
   font-size: var(--sl-input-font-size-medium);
   transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border,
     var(--sl-transition-fast) box-shadow,
     var(--sl-transition-fast) background-color;
+}
+
+.columns {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+
+  .col {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+  }
+}
+
+.form-group {
+  display: grid;
+  gap: 3px;
+  align-items: center;
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="date"],
+  textarea,
+  select {
+    @include form-element();
+  }
+}
+
+.checkbox {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 3px;
+
+  input[type="checkbox"] {
+    margin: 6px 0 7px 0;
+  }
+
+  .form-group {
+    align-content: start;
+    justify-content: start;
+    grid-auto-flow: column;
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  justify-content: end;
 }
