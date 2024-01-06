@@ -6,9 +6,7 @@ import { compareDates, formatDate, showToast } from "./utils/utilities.js";
   const lang = $calendar.getAttribute("lang").split("-").pop();
 
   let calendarData = [],
-    holidaysData = [],
-    customersData = [],
-    selectedCustomer = null;
+    holidaysData = [];
 
   const slotFind = (data) => (row) =>
     compareDates(row.work_date, data.slot) &&
@@ -72,10 +70,14 @@ import { compareDates, formatDate, showToast } from "./utils/utilities.js";
     calendarData = await fetch(
       `/api/calendar?month=${month}&year=${year}`
     ).then((data) => data.json());
+
     calendarData = calendarData.map((row) => ({
       ...row,
-      work_date: new Date(row.work_date),
+      event_date: new Date(row.event_date),
     }));
+
+    $calendar.setCalendarData(calendarData);
+    $calendar.refreshTableData();
   }
 
   async function loadHolidaysData(year) {
@@ -90,49 +92,30 @@ import { compareDates, formatDate, showToast } from "./utils/utilities.js";
     }));
   }
 
-  async function loadCustomers() {
-    customersData = await fetch("/api/customers").then((data) => data.json());
-  }
-
   // Event handlers
   function onBadgeClickHandler(e) {
     e.stopPropagation();
 
-    const { date, customer_uid } = e.detail;
+    const { date, event_uid } = e.detail;
 
-    if (!customer_uid) {
-      showToast("This slot is missing the customer info!");
+    if (!event_uid) {
+      showToast("This slot is missing the event info!");
       return;
     }
 
     removeCalendarEvent({ slot: date, customer: customer_uid });
   }
 
-  function onDaySelectHandler(e) {
-    if (!selectedCustomer) {
-      showToast("Select a customer first!");
-      return;
-    }
-
-    const data = {
-      slot: new Date(e.detail.day),
-      customer: selectedCustomer.uid,
-    };
-    addCalendarEvent(data);
-  }
+  function onDaySelectHandler(e) {}
 
   function onMonthChangeHandler(e) {
-    console.log(e.detail.month);
+    currentDate.setMonth(e.detail.month);
+    loadCalendarData(currentDate.getMonth() + 1, currentDate.getFullYear());
   }
 
   function onYearChangeHandler(e) {
-    console.log(e.detail.year);
-  }
-
-  function onCustomerChangeHandler(e) {
-    selectedCustomer = customersData.find(
-      (row) => row.uid === e.detail.customer_uid
-    );
+    currentDate.setFullYear(e.detail.year);
+    loadCalendarData(currentDate.getMonth() + 1, currentDate.getFullYear());
   }
 
   // DOM Events
@@ -140,14 +123,11 @@ import { compareDates, formatDate, showToast } from "./utils/utilities.js";
   $calendar.addEventListener("dayselect", onDaySelectHandler);
   $calendar.addEventListener("monthchange", onMonthChangeHandler);
   $calendar.addEventListener("yearchange", onYearChangeHandler);
-  $calendar.addEventListener("customerchange", onCustomerChangeHandler);
 
   // Initializing
-  await loadCustomers();
   await loadCalendarData(currentDate.getMonth() + 1, currentDate.getFullYear());
   await loadHolidaysData(currentDate.getFullYear());
 
-  $calendar.setCustomerData(customersData);
   $calendar.setHolidaysData(holidaysData || []);
   $calendar.setCalendarData(calendarData || []);
   $calendar.render();

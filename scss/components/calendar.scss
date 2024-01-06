@@ -10,8 +10,14 @@
 
   .toolbar {
     display: grid;
-    grid-template-columns: min-content min-content auto;
+    grid-auto-flow: column;
+    justify-content: start;
     gap: 6px;
+
+    i {
+      cursor: pointer;
+      font-style: normal;
+    }
   }
 
   .table {
@@ -60,17 +66,13 @@
         &.current-date {
           color: var(--sl-color-primary-200);
           font-weight: 700;
+          background-color: #2d485a70;
+        }
 
-          span {
-            position: absolute;
-            padding: 4px;
-            border-radius: 100px;
-            box-shadow: var(--sl-color-amber-600) 0 0 10px 2px;
-            background-color: var(--sl-color-amber-600);
-            width: 16px;
-            height: 16px;
-            line-height: 15px;
-          }
+        &.holiday {
+          color: var(--sl-color-amber-500);
+          font-weight: 700;
+          background-color: #ffae0020;
         }
 
         &.clickable {
