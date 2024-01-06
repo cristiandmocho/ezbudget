@@ -241,3 +241,23 @@ export const fillDropdown = (dropdown, data, valueField, textField) => {
     dropdown.appendChild($option);
   });
 };
+
+/**
+ * Fills a form with data
+ *
+ * @param {HTMLFormElement} form - The form element to fill
+ * @param {Object} data - Object containing data to populate the form with
+ */
+export const fillForm = (form, data) => {
+  if (!form) return;
+
+  Object.entries(data).forEach(([key, value]) => {
+    const $input = form.querySelector(`[name="${key}"]`);
+    if (!$input) return;
+    if ($input.type === "checkbox") {
+      $input.checked = value;
+    } else {
+      $input.value = value;
+    }
+  });
+};
