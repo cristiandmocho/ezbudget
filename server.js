@@ -11,6 +11,8 @@ import registerErrorHandler from "./middleware/errorhandling.js";
 import Package from "./package.json" assert { type: "json" };
 
 import pkg from "express-openid-connect";
+import MySQL from "./utils/mysql.js";
+
 const { auth } = pkg;
 
 class Server {
@@ -80,11 +82,14 @@ class Server {
 
     this.server.use(async function (req, res, next) {
       if (req.oidc.isAuthenticated()) {
-        let tenant = await fetch(`${process.env.BASE_URL}/api/tenant/bysub`, {
-          method: "POST",
-          body: JSON.stringify({ sub: req.oidc.user.sub }),
-          headers: { "Content-Type": "application/json" },
-        }).then((data) => data.json());
+        const dbConfig = req.app.get("dbconfig");
+        const mySql = new MySQL(dbConfig);
+        const { sub } = req.oidc.user;
+
+        let query = "select * from tenants where auth0_uid = ?";
+
+        const result = await mySql.Query(query, [sub]);
+        const tenant = result.rows[0];
 
         if (!tenant) {
           // The tenant does not exist, so we need to create it
