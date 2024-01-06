@@ -8,14 +8,19 @@ router.get("/version", API.VersionGet);
 
 router.get("/holidays", API.HolidayGet);
 
-router.post("/tenant/bysub", API.TenantBySubPost);
+router.get("/tenant", API.TenantGet);
 router.post("/tenant", API.TenantPost);
 router.patch("/tenant", API.TenantPatch);
 router.delete("/tenant", API.TenantDelete);
-router.get("/tenant", API.TenantCurrentGet);
 
 router.get("/calendar", API.CalendarGet);
 router.post("/calendar", API.CalendarPost);
 router.delete("/calendar", API.CalendarDelete);
+
+router.get("/categories", API.CategoriesGet);
+router.get("/category/:uid", API.CategoryGet);
+router.post("/category", API.CategoryPost);
+router.patch("/category/:uid", API.CategoryPatch);
+router.delete("/category/:uid", API.CategoryDelete);
 
 export default router;
