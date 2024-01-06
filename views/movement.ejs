@@ -1,0 +1,146 @@
+<div class="content">
+  <h1>Movements</h1>
+  <hr />
+  <section class="content">
+    <form>
+      <div class="columns">
+        <div class="col">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+
+          <div class="form-group">
+            <label for="direction">Direction</label>
+            <select id="direction" name="direction" required>
+              <option value="I">Income</option>
+              <option value="E">Expense</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="due_date">Due Date</label>
+            <input type="date" id="due_date" name="due_date" />
+          </div>
+
+          <div class="form-group">
+            <label for="recurring">Recurring?</label>
+            <select id="recurring" name="recurring" required>
+              <option value="N">No</option>
+              <option value="Y">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" id="category" name="category" required />
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" required />
+          </div>
+
+          <div class="form-group">
+            <label for="currency">Currency</label>
+            <input
+              type="text"
+              id="currency"
+              name="currency"
+              value="EUR"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="recur_type">Recurrency</label>
+            <select id="recur_type" name="recur_type" required>
+              <option value="0">None</option>
+              <option value="1">Monthly</option>
+              <option value="2">Quarterly</option>
+              <option value="3">Semi-annual</option>
+              <option value="4">Yearly</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+      </div>
+    </form>
+  </section>
+  <section class="table">
+    <div class="table-container">
+      <div class="toolbar">
+        <sl-tooltip content="Add new">
+          <sl-button size="small" variant="primary" name="new" outline>
+            <i slot="prefix" class="mdi">add_circle</i>
+          </sl-button>
+        </sl-tooltip>
+        <sl-tooltip content="Edit">
+          <sl-button size="small" variant="primary" name="edit" outline
+            ><i slot="prefix" class="mdi">edit</i></sl-button
+          >
+        </sl-tooltip>
+        <sl-tooltip content="Delete">
+          <sl-button size="small" variant="danger" name="delete" outline
+            ><i slot="prefix" class="mdi">delete</i></sl-button
+          >
+        </sl-tooltip>
+        <sl-tooltip content="Duplicate">
+          <sl-button size="small" variant="primary" name="copy" outline
+            ><i slot="prefix" class="mdi">copy_all</i></sl-button
+          >
+        </sl-tooltip>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Recurrency</th>
+              <th>Created</th>
+              <th>Due date</th>
+              <th>Paid on</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <section class="pagesize">
+          <label for="pagesize">Page size</label>
+          <select name="pagesize" id="pagesize">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </section>
+        <section class="pageinfo">
+          <div>Showing <span>0</span> records</div>
+          <div>
+            Page <input type="number" value="1" max="1" /> of <span>1</span>.
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+  <section class="buttons">
+    <sl-button name="btnSaveClose" variant="primary">Save & Close</sl-button>
+    <sl-button name="btnClose" variant="warning">Close</sl-button>
+  </section>
+</div>
+
+<%- contentFor('scripts') %>
+<script type="module" src="/scripts/movement.js" defer></script>
+
+<%- contentFor('styles') %>
+<link rel="stylesheet" href="/css/views/movement.css" />

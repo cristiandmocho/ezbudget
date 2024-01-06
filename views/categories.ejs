@@ -1,0 +1,81 @@
+<div class="content">
+  <h1>Categories</h1>
+  <hr />
+  <section class="content">
+    <form>
+      <div class="columns">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="sort_order">Sort Order</label>
+          <input
+            type="number"
+            id="sort_order"
+            name="sort_order"
+            value="0"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="name">Color</label>
+          <input type="color" id="color" name="color" />
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+      </div>
+    </form>
+  </section>
+  <section class="table">
+    <div class="table-container">
+      <div class="toolbar">
+        <sl-tooltip content="Add new">
+          <sl-button size="small" variant="primary" name="new" outline>
+            <i slot="prefix" class="mdi">add_circle</i>
+          </sl-button>
+        </sl-tooltip>
+        <sl-tooltip content="Edit">
+          <sl-button size="small" variant="primary" name="edit" outline
+            ><i slot="prefix" class="mdi">edit</i></sl-button
+          >
+        </sl-tooltip>
+        <sl-tooltip content="Delete">
+          <sl-button size="small" variant="danger" name="delete" outline
+            ><i slot="prefix" class="mdi">delete</i></sl-button
+          >
+        </sl-tooltip>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Color</th>
+              <th>Description</th>
+              <th>Order</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="pagination"></div>
+    </div>
+  </section>
+  <section class="buttons">
+    <sl-button name="btnSave" variant="success">Save</sl-button>
+    <sl-button name="btnSaveClose" variant="primary">Save & Close</sl-button>
+    <sl-button name="btnClose" variant="warning">Close</sl-button>
+  </section>
+</div>
+
+<%- contentFor('scripts') %>
+<script type="module" src="/scripts/categories.js" defer></script>
+
+<%- contentFor('styles') %>
+<link rel="stylesheet" href="/css/views/categories.css" />
