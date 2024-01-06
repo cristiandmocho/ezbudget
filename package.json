@@ -1,6 +1,6 @@
 {
   "name": "ezbudget",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ezBudget",
   "main": "server.js",
   "type": "module",
