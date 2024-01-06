@@ -12,7 +12,6 @@ router.post("/tenant/bysub", API.TenantBySubPost);
 router.post("/tenant", API.TenantPost);
 router.patch("/tenant", API.TenantPatch);
 router.delete("/tenant", API.TenantDelete);
-router.get("/tenant/:uid", API.TenantGet);
 router.get("/tenant", API.TenantCurrentGet);
 
 router.get("/calendar", API.CalendarGet);

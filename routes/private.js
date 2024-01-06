@@ -11,6 +11,5 @@ import * as Web from "../controller/web/index.js";
 // Routes
 router.get("/dashboard", Web.DashboardHandler);
 router.get("/profile", Web.ProfileHandler);
-router.get("/calendar", Web.CalendarHandler);
 
 export default router;

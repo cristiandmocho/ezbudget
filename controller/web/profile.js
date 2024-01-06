@@ -5,7 +5,11 @@
  * @returns
  */
 const RequestHandler = async (req, res) => {
-  return res.render("profile", { title: "Tenant Profile", locals: res.locals });
+  return res.render("profile", {
+    title: "Tenant Profile",
+    locals: res.locals,
+    version: res.app.get("version"),
+  });
 };
 
 export default RequestHandler;

@@ -10,10 +10,10 @@ export default async function RequestHandler(req, res) {
   const urlQuery = req.query;
   const { month, year } = urlQuery;
 
-  let query = "select * from vw_calendar_info";
+  let query = "select * from calendar_info";
   if (month && year)
     query +=
-      " where month(work_date) between ? and ? and year(work_date)=? and tenant_uid=? order by work_date asc";
+      " where month(event_date) between ? and ? and year(event_date)=? and tenant_uid=? order by event_date asc";
 
   const data = await mySql.Query(query, [
     month,

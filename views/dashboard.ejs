@@ -1,181 +1,53 @@
 <div class="content">
-  <h1>Invoice List</h1>
+  <h1>Dashboard</h1>
   <hr />
-  <div class="table">
-    <div class="toolbar">
-      <sl-tooltip content="Add new">
-        <sl-button size="small" variant="primary" name="new" outline>
-          <i slot="prefix" class="mdi">add_circle</i>
-        </sl-button>
-      </sl-tooltip>
-      <sl-tooltip content="Cancel invoice">
-        <sl-button size="small" variant="danger" name="cancel" outline
-          ><i slot="prefix" class="mdi">delete</i></sl-button
-        >
-      </sl-tooltip>
-      <sl-tooltip content="Print invoice">
-        <sl-button size="small" variant="primary" name="print" outline
-          ><i slot="prefix" class="mdi">print</i></sl-button
-        >
-      </sl-tooltip>
-      <sl-tooltip content="Mark as printed">
-        <sl-button size="small" variant="success" name="printed" outline
-          ><i slot="prefix" class="mdi">print_connect</i></sl-button
-        >
-      </sl-tooltip>
-      <sl-tooltip content="Mark as e-mailed">
-        <sl-button size="small" variant="success" name="sent" outline
-          ><i slot="prefix" class="mdi">outgoing_mail</i></sl-button
-        >
-      </sl-tooltip>
-      <sl-tooltip content="Mark as paid">
-        <sl-button size="small" variant="success" name="paid" outline
-          ><i slot="prefix" class="mdi">payments</i></sl-button
-        >
-      </sl-tooltip>
+  <div class="columns">
+    <div class="col">
+      <ez-calendar
+        lang="<%= locals?.tenant?.preferences?.lang || 'en-gb' %>"
+      ></ez-calendar>
     </div>
+    <div
+      class="col"
+      style="
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        align-content: center;
+      "
+    >
+      <div id="chart-expenses"></div>
+      <div id="chart-income"></div>
+    </div>
+  </div>
+  <div class="table-container">
     <div class="table">
       <table>
         <thead>
           <tr>
-            <th>Invoice #</th>
-            <th>Customer</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Recurrency</th>
             <th>Created</th>
-            <th>Due Date</th>
-            <th>Paid On</th>
-            <th>Status</th>
-            <th>Value</th>
+            <th>Due date</th>
+            <th>Paid on</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
     </div>
-    <div class="pagination"></div>
   </div>
 </div>
 
-<template id="dlgNewInvoice">
-  <section class="content">
-    <div class="columns">
-      <div class="col">
-        <div class="form-group">
-          <label for="customer_uid">Customer</label>
-          <select name="customer_uid"></select>
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label>Reference</label>
-          <div class="columns">
-            <div class="col">
-              <select name="month"></select>
-            </div>
-            <div class="col">
-              <input
-                type="number"
-                name="year"
-                placeholder="Year"
-                min="1970"
-                max="2999"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="details">Details</label>
-      <textarea
-        name="details"
-        placeholder="Use semi-colons (;) to separate lines"
-      >
-Attending to meetings, internal training, software development, general consulting.</textarea
-      >
-    </div>
-
-    <div class="columns">
-      <div class="col">
-        <div class="form-group">
-          <label for="created">Created Date</label>
-          <input type="date" name="created" />
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label for="due_date">Due Date</label>
-          <input type="date" name="due_date" />
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label for="paid_on">Paid On</label>
-          <input type="date" name="paid_on" />
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label for="sent">Sent Date</label>
-          <input type="date" name="sent" />
-        </div>
-      </div>
-    </div>
-    <hr />
-    <h3>Invoice Lines</h3>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Description</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Discount</th>
-          <th>VAT</th>
-          <th>
-            &nbsp;
-            <sl-tooltip content="Add new line">
-              <i class="mdi">add</i>
-            </sl-tooltip>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <input type="text" name="description" />
-          </td>
-          <td>
-            <input type="number" name="quantity" />
-          </td>
-          <td>
-            <input type="number" name="price" />
-          </td>
-          <td>
-            <input type="number" name="discount" />
-          </td>
-          <td>
-            <input type="number" name="vat" />
-          </td>
-          <td>
-            <sl-tooltip content="Delete line">
-              <i class="mdi">delete</i>
-            </sl-tooltip>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="5">
-            <div>Invoice Total: <span class="total">0.00</span></div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-  </section>
-</template>
-
 <%- contentFor('scripts') %>
+<script
+  type="text/javascript"
+  src="https://www.gstatic.com/charts/loader.js"
+></script>
 <script type="module" src="/scripts/dashboard.js" defer></script>
+<script type="module" src="/scripts/calendar.js" defer></script>
 
 <%- contentFor('styles') %>
 <link rel="stylesheet" href="/css/views/dashboard.css" />
