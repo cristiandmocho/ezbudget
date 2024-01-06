@@ -1,4 +1,4 @@
-import { compareDates, formatDate, showToast } from "./utils/utilities.js";
+import { compareDates, formatDate, showToast } from "../../utils/utilities.js";
 
 (async () => {
   const currentDate = new Date();

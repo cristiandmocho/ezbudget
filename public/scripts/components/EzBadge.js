@@ -1,4 +1,4 @@
-import { getBestContrastColor } from "../utils/utilities.js";
+import { getBestContrastColor } from "../../utils/utilities.js";
 
 export default class ezBadge extends HTMLElement {
   static get observedAttributes() {

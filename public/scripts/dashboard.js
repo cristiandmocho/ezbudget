@@ -1,10 +1,9 @@
-import { ONEDAY } from "./utils/constants.js";
 import {
   formatAsCurrency,
   formatDate,
   showConfirmDialog,
   showToast,
-} from "./utils/utilities.js";
+} from "../../utils/utilities.js";
 
 (async () => {
   let tableData = [];

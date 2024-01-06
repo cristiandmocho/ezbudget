@@ -3,7 +3,7 @@ import {
   getMonthNames,
   compareDates,
   formatDate,
-} from "../utils/utilities.js";
+} from "../../utils/utilities.js";
 
 export default class ezCalendar extends HTMLElement {
   constructor() {

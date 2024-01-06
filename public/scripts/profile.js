@@ -1,4 +1,8 @@
-import { formatDate, showToast, showConfirmDialog } from "./utils/utilities.js";
+import {
+  formatDate,
+  showToast,
+  showConfirmDialog,
+} from "../../utils/utilities.js";
 
 (async () => {
   const Tenant = {
