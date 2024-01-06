@@ -38,6 +38,7 @@ create table categories (
   uid varchar(36) not null default (UUID()),
   tenant_uid varchar(36) not null,
   name varchar(50) not null,
+  color varchar(9) default null,
   description text default null,
   sort_order int(10) not null default 0,
   primary key (uid)
