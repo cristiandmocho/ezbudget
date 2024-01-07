@@ -16,6 +16,12 @@ import CategoryPost from "./category.post.js";
 import CategoryPatch from "./category.patch.js";
 import CategoryDelete from "./category.delete.js";
 
+import MovementsGet from "./movements.get.js";
+import MovementGet from "./movement.get.js";
+import MovementPost from "./movement.post.js";
+import MovementPatch from "./movement.patch.js";
+import MovementDelete from "./movement.delete.js";
+
 export {
   HolidayGet,
   VersionGet,
@@ -31,4 +37,9 @@ export {
   CategoryPost,
   CategoryPatch,
   CategoryDelete,
+  MovementsGet,
+  MovementGet,
+  MovementPost,
+  MovementPatch,
+  MovementDelete,
 };

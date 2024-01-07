@@ -76,6 +76,10 @@ create table doc_types (
   primary key (id)
 ); */
 
+create view vw_movements as
+	select m.*, c.name, c.color, c.sort_order from movements m 
+	inner join categories c on c.uid = m.category_uid;
+
 create table calendar_info (
   uid varchar(36) not null default (UUID()),
   event_date timestamp not null,

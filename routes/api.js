@@ -23,4 +23,10 @@ router.post("/category", API.CategoryPost);
 router.patch("/category/:uid", API.CategoryPatch);
 router.delete("/category/:uid", API.CategoryDelete);
 
+router.get("/movements", API.MovementsGet);
+router.get("/movement/:uid", API.MovementGet);
+router.post("/movement", API.MovementPost);
+router.patch("/movement/:uid", API.MovementPatch);
+router.delete("/movement/:uid", API.MovementDelete);
+
 export default router;
