@@ -26,6 +26,7 @@
           <div class="form-group">
             <label for="recurring">Recurring?</label>
             <select id="recurring" name="recurring" required>
+              <option value="">-- Please select --</option>
               <option value="N">No</option>
               <option value="Y">Yes</option>
             </select>
@@ -35,7 +36,7 @@
         <div class="col">
           <div class="form-group">
             <label for="category">Category</label>
-            <input type="text" id="category" name="category" required />
+            <select id="category" name="category" required></select>
           </div>
 
           <div class="form-group">
@@ -49,7 +50,7 @@
               type="text"
               id="currency"
               name="currency"
-              value="EUR"
+              data-default="EUR"
               required
             />
           </div>
@@ -57,6 +58,7 @@
           <div class="form-group">
             <label for="recur_type">Recurrency</label>
             <select id="recur_type" name="recur_type" required>
+              <option value="">-- Please select --</option>
               <option value="0">None</option>
               <option value="1">Monthly</option>
               <option value="2">Quarterly</option>
@@ -73,7 +75,7 @@
       </div>
     </form>
   </section>
-  <section class="table">
+  <section style="height: 100%; overflow: auto">
     <div class="table-container">
       <div class="toolbar">
         <sl-tooltip content="Add new">
@@ -118,22 +120,24 @@
         <section class="pagesize">
           <label for="pagesize">Page size</label>
           <select name="pagesize" id="pagesize">
-            <option value="10">10</option>
+            <option value="10" selected>10</option>
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
         </section>
         <section class="pageinfo">
-          <div>Showing <span>0</span> records</div>
+          <div>Showing <span name="numrecords">0</span> records</div>
           <div>
-            Page <input type="number" value="1" max="1" /> of <span>1</span>.
+            Page <input type="number" value="1" name="pagenum" /> of
+            <span name="maxpages">1</span>.
           </div>
         </section>
       </div>
     </div>
   </section>
   <section class="buttons">
+    <sl-button name="btnSave" variant="success">Save</sl-button>
     <sl-button name="btnSaveClose" variant="primary">Save & Close</sl-button>
     <sl-button name="btnClose" variant="warning">Close</sl-button>
   </section>

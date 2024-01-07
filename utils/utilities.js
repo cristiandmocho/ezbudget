@@ -271,7 +271,9 @@ export const clearForm = (form) => {
   const inputs = form.querySelectorAll("input, textarea, select");
 
   inputs.forEach((input) => {
-    if (input.type === "checkbox" || input.type === "radio") {
+    if (input.dataset.default) {
+      input.value = input.dataset.default;
+    } else if (input.type === "checkbox" || input.type === "radio") {
       input.checked = false;
     } else if (input.type === "number") {
       input.value = 0;
