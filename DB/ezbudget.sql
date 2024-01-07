@@ -28,8 +28,8 @@ create table movements (
   currency varchar(3) not null,
   recurring char(1) not null default 'N' comment '(Y)es, (N)o',
   recur_type tinyint not null default 0 comment '0: None, 1: Monthly, 2: Quarterly, 3: Semi-annual, 4: Yearly',
-  created timestamp not null default (UTC_TIMESTAMP),
-  paid timestamp default null,
+  created_on timestamp not null default (UTC_TIMESTAMP),
+  paid_on timestamp default null,
   due_date timestamp default null,
   primary key (uid)
 );
