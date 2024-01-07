@@ -31,6 +31,17 @@
               <option value="Y">Yes</option>
             </select>
           </div>
+
+          <div class="form-group">
+            <label for="currency">Currency</label>
+            <input
+              type="text"
+              id="currency"
+              name="currency"
+              data-default="EUR"
+              required
+            />
+          </div>
         </div>
 
         <div class="col">
@@ -45,14 +56,8 @@
           </div>
 
           <div class="form-group">
-            <label for="currency">Currency</label>
-            <input
-              type="text"
-              id="currency"
-              name="currency"
-              data-default="EUR"
-              required
-            />
+            <label for="paid_on">Paid On</label>
+            <input type="date" id="paid_on" name="paid_on" />
           </div>
 
           <div class="form-group">
@@ -66,12 +71,12 @@
               <option value="4">Yearly</option>
             </select>
           </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" />
+          </div>
         </div>
-      </div>
-      <br />
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" name="description"></textarea>
       </div>
     </form>
   </section>
@@ -108,7 +113,6 @@
               <th>Category</th>
               <th>Amount</th>
               <th>Recurrency</th>
-              <th>Created</th>
               <th>Due date</th>
               <th>Paid on</th>
             </tr>
@@ -127,7 +131,7 @@
           </select>
         </section>
         <section class="pageinfo">
-          <div>Showing <span name="numrecords">0</span> records</div>
+          <div>Total of <span name="numrecords">0</span> record(s)</div>
           <div>
             Page <input type="number" value="1" name="pagenum" /> of
             <span name="maxpages">1</span>.

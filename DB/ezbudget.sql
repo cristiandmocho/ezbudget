@@ -77,7 +77,7 @@ create table doc_types (
 ); */
 
 create view vw_movements as
-	select m.*, c.name, c.color, c.sort_order from movements m 
+	select m.*, c.name as category, c.color, c.sort_order from movements m 
 	inner join categories c on c.uid = m.category_uid;
 
 create table calendar_info (

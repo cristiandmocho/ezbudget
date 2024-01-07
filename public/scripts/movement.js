@@ -2,8 +2,9 @@ import {
   fillForm,
   fillDropdown,
   clearForm,
-  showToast,
   readForm,
+  validateForm,
+  showToast,
   showConfirmDialog,
   formatDate,
 } from "../../utils/utilities.js";
@@ -20,8 +21,7 @@ import {
         <td><span>${formatColumn("direction", row)}</span></td>
         <td><span>${formatColumn("category", row)}</span></td>
         <td><span>${formatColumn("amount", row)}</span></td>
-        <td><span>${formatColumn("recurrency", row)}</span></td>
-        <td><span>${formatColumn("created_on", row)}</span></td>
+        <td><span>${formatColumn("recur_type", row)}</span></td>
         <td><span>${formatColumn("due_date", row)}</span></td>
         <td><span>${formatColumn("paid_on", row)}</span></td>
       </tr>`;
@@ -29,14 +29,14 @@ import {
 
   const noRows = `
     <tr>
-      <td class="no-rows" colspan="8">
+      <td class="no-rows" colspan="7">
         <span> No rows to show</span>
       </td>
     </tr>`;
 
   const loadingRows = `
     <tr>
-      <td class="no-rows" colspan="8">
+      <td class="no-rows" colspan="7">
         <i class="mdi spin">settings</i>&nbsp;<span>Loading... Please wait...</span>
       </td>
     </tr>`;
@@ -72,9 +72,9 @@ import {
 
       // Map the dates
       tableData.forEach((row) => {
-        row.created_on = new Date(row.created_on);
-        row.due_date = new Date(row.due_date);
-        row.paid_on = new Date(row.paid_on);
+        if (row.created_on) row.created_on = new Date(row.created_on);
+        if (row.due_date) row.due_date = new Date(row.due_date);
+        if (row.paid_on) row.paid_on = new Date(row.paid_on);
       });
 
       tbody.innerHTML = tableData.length
@@ -112,7 +112,24 @@ import {
           currency: row.currency,
         }).format(row[key]);
 
-      case "created_on":
+      case "direction":
+        return row[key] === "I" ? "Income" : "Expense";
+
+      case "recur_type":
+        switch (row[key]) {
+          default:
+            return "";
+          case 0:
+            return "None";
+          case 1:
+            return "Monthly";
+          case 2:
+            return "Quarterly";
+          case 3:
+            return "Semi-annual";
+          case 4:
+            return "Yearly";
+        }
       case "due_date":
       case "paid_on":
         return formatDate(row[key]);
@@ -140,6 +157,12 @@ import {
       const movement = await fetch(`/api/movement/${uid}`).then((data) =>
         data.json()
       );
+
+      // Map the dates
+      if (movement.created_on)
+        movement.created_on = new Date(movement.created_on);
+      if (movement.due_date) movement.due_date = new Date(movement.due_date);
+      if (movement.paid_on) movement.paid_on = new Date(movement.paid_on);
 
       fillForm(form, movement);
     } catch (e) {
@@ -257,22 +280,25 @@ import {
 
     async function saveData() {
       if (dirty) {
-        if (selectedRow) {
-          const row = readForm(form);
-          row.uid = selectedRow.uid;
+        const isValid = validateForm(form);
+        if (isValid) {
+          if (selectedRow) {
+            const row = readForm(form);
+            row.uid = selectedRow.uid;
 
-          await updateMovement(row);
-        } else {
-          const row = readForm(form);
-          await saveMovement(row);
+            await updateMovement(row);
+          } else {
+            const row = readForm(form);
+            await saveMovement(row);
+          }
+
+          dirty = false;
+          selectedRow = null;
+
+          clearForm(form);
+          form.querySelector("input").focus();
         }
       }
-
-      dirty = false;
-      selectedRow = null;
-
-      clearForm(form);
-      form.querySelector("input").focus();
     }
 
     switch (btn) {

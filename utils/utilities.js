@@ -64,7 +64,7 @@ export const formatAsCurrency = (value) => {
 };
 
 export const formatDate = (date) => {
-  if (!date) return "N/A";
+  if (!date) return null;
   if (typeof date === "string") return date.substring(0, 10);
   return new Date(date).toISOString().split("T")[0]; // YYYY-MM-DD
 };
@@ -252,12 +252,18 @@ export const fillForm = (form, data) => {
   if (!form) return;
 
   Object.entries(data).forEach(([key, value]) => {
-    const $input = form.querySelector(`[name="${key}"]`);
-    if (!$input) return;
-    if ($input.type === "checkbox") {
-      $input.checked = value;
+    const input = form.querySelector(`[name="${key}"]`);
+
+    if (!input) return;
+
+    if (input.type === "checkbox") {
+      input.checked = value;
+    } else if (input.type === "number") {
+      input.value = Number(value);
+    } else if (input.type === "date") {
+      input.value = formatDate(value);
     } else {
-      $input.value = value;
+      input.value = value;
     }
   });
 };
@@ -296,9 +302,40 @@ export const readForm = (form) => {
 
   inputs.forEach((input) => {
     if (input.name) {
-      data[input.name] = input.value;
+      if (input.type === "checkbox") {
+        data[input.name] = input.checked;
+      } else if (input.type === "number") {
+        data[input.name] = Number(input.value);
+      } else if (input.type === "date") {
+        data[input.name] = formatDate(input.value);
+      } else {
+        data[input.name] = input.value;
+      }
     }
   });
 
   return data;
+};
+
+/**
+ * Validates required fields in a form
+ *
+ * @param {HTMLFormElement} form - The form element to validate
+ * @returns {boolean} - True if all required fields are filled, false otherwise
+ */
+export const validateForm = (form) => {
+  const inputs = form.querySelectorAll("[required]");
+
+  let isValid = true;
+
+  inputs.forEach((input) => {
+    if (!input.value) {
+      input.classList.add("is-invalid");
+      isValid = false;
+    } else {
+      input.classList.remove("is-invalid");
+    }
+  });
+
+  return isValid;
 };
