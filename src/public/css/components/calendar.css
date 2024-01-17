@@ -1,0 +1,132 @@
+.columns {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+}
+.columns .col {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.form-group {
+  display: grid;
+  gap: 3px;
+  align-items: center;
+}
+.form-group input[type=text],
+.form-group input[type=number],
+.form-group input[type=email],
+.form-group input[type=date],
+.form-group textarea,
+.form-group select {
+  padding: 4px 8px;
+  min-height: 29px;
+  border: var(--sl-input-border-width) solid var(--sl-input-border-color);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) background-color;
+}
+.form-group input[type=text].is-invalid,
+.form-group input[type=number].is-invalid,
+.form-group input[type=email].is-invalid,
+.form-group input[type=date].is-invalid,
+.form-group textarea.is-invalid,
+.form-group select.is-invalid {
+  border-color: var(--sl-color-danger-600);
+}
+
+.checkbox {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 3px;
+}
+.checkbox input[type=checkbox] {
+  margin: 6px 0 7px 0;
+}
+.checkbox .form-group {
+  align-content: start;
+  justify-content: start;
+  grid-auto-flow: column;
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  justify-content: end;
+}
+
+.ez-calendar {
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content auto;
+  gap: 20px;
+}
+.ez-calendar .toolbar {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 6px;
+}
+.ez-calendar .toolbar i {
+  cursor: pointer;
+  font-style: normal;
+}
+.ez-calendar .table {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content auto;
+}
+.ez-calendar .table .thead {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.ez-calendar .table .thead .th {
+  padding: 8px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+.ez-calendar .table .thead .th:nth-child(1), .ez-calendar .table .thead .th:nth-child(7) {
+  color: var(--sl-color-amber-200);
+}
+.ez-calendar .table .tbody {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+}
+.ez-calendar .table .tbody .td {
+  padding: 8px;
+  border: solid 1px var(--sl-color-neutral-200);
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  opacity: 0.3;
+}
+.ez-calendar .table .tbody .td.current-month {
+  opacity: 1;
+}
+.ez-calendar .table .tbody .td.weekend {
+  color: var(--sl-color-amber-200);
+}
+.ez-calendar .table .tbody .td.current-date {
+  color: var(--sl-color-primary-200);
+  font-weight: 700;
+  background-color: rgba(45, 72, 90, 0.4392156863);
+}
+.ez-calendar .table .tbody .td.holiday {
+  color: var(--sl-color-amber-500);
+  font-weight: 700;
+  background-color: rgba(255, 174, 0, 0.1254901961);
+}
+.ez-calendar .table .tbody .td.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.ez-calendar .table .tbody .td.clickable:hover {
+  background-color: var(--sl-color-neutral-100);
+}

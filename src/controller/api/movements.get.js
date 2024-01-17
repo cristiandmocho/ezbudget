@@ -33,7 +33,9 @@ export default async function RequestHandler(req, res) {
   const count = await mySql.Query(query1, params);
   const data = await mySql.Query(
     query2,
-    pageNum && pageSize ? [...params, pageNum, pageSize] : params
+    pageNum && pageSize
+      ? [...params, Number(pageNum), Number(pageSize)]
+      : params
   );
 
   return res.json({ totalRecords: count.rows[0].qty, data: data.rows });

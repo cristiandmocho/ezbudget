@@ -78,11 +78,6 @@
             background-color: var(--sl-color-gray-100);
           }
 
-          &:hover td {
-            background-color: var(--sl-color-gray-200);
-            cursor: pointer;
-          }
-
           &.selected td {
             background-color: var(--sl-color-gray-400);
           }
@@ -94,6 +89,19 @@
               background-color: inherit;
               color: inherit;
             }
+          }
+
+          &:hover td {
+            background-color: var(--sl-color-gray-200);
+            cursor: pointer;
+          }
+
+          &.past-due td {
+            background-color: var(--sl-color-danger-500);
+          }
+
+          &.past-due:hover td {
+            background-color: var(--sl-color-danger-700);
           }
 
           td {

@@ -283,22 +283,15 @@ export default class ezCalendar extends HTMLElement {
         month = 0;
         this.selectedDate.setFullYear(this.selectedDate.getFullYear() + 1);
 
-        this.dispatchEvent(
-          new CustomEvent("yearchange", {
-            detail: {
-              year: this.selectedDate.getFullYear(),
-            },
-          })
-        );
-
         yearInput.value = this.selectedDate.getFullYear();
       }
 
       this.selectedDate.setMonth(month);
 
       this.dispatchEvent(
-        new CustomEvent("monthchange", {
+        new CustomEvent("calendarchange", {
           detail: {
+            year: this.selectedDate.getFullYear(),
             month: this.selectedDate.getMonth(),
           },
         })
@@ -318,22 +311,15 @@ export default class ezCalendar extends HTMLElement {
         month = 11;
         this.selectedDate.setFullYear(this.selectedDate.getFullYear() - 1);
 
-        this.dispatchEvent(
-          new CustomEvent("yearchange", {
-            detail: {
-              year: this.selectedDate.getFullYear(),
-            },
-          })
-        );
-
         yearInput.value = this.selectedDate.getFullYear();
       }
 
       this.selectedDate.setMonth(month);
 
       this.dispatchEvent(
-        new CustomEvent("monthchange", {
+        new CustomEvent("calendarchange", {
           detail: {
+            year: this.selectedDate.getFullYear(),
             month: this.selectedDate.getMonth(),
           },
         })

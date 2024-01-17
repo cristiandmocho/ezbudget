@@ -3,55 +3,111 @@ import {
   formatDate,
   showConfirmDialog,
   showToast,
+  getMonthNames,
 } from "../../utils/utilities.js";
 
 (async () => {
   let tableData = [];
+  let currentDate = new Date();
+
+  const monthNames = getMonthNames("en-GB", "short");
 
   const dataRow = (row) => {
     return `
-  <tr data-uid="${row.uid}" class="${formatRow(row)}">
-    <td><div style="display: grid; grid-template-columns: min-content auto;"><i class="mdi">${rowIcon(
-      row
-    )}</i><span>${formatColumn("invoice_no", row)}</span></div></td>
-    <td><span>${formatColumn("customer_name", row)}</span></td>
-    <td><span>${formatColumn("created", row)}</span></td>
-    <td><span>${formatColumn("due_date", row)}</span></td>
-    <td><span>${formatColumn("paid_on", row)}</span></td>
-    <td><span>${formatColumn("status", row)}</span></td>
-    <td><span>${formatColumn("value", row)}</span></td>
-  </tr>`;
+      <tr data-uid="${row.uid}" class="${rowClasses(row)}">
+        <td><span>${formatColumn("title", row)}</span></td>
+        <td><span>${formatColumn("direction", row)}</span></td>
+        <td><span>${formatColumn("category", row)}</span></td>
+        <td><span>${formatColumn("amount", row)}</span></td>
+        <td><span>${formatColumn("recur_type", row)}</span></td>
+        <td><span>${formatColumn("due_date", row)}</span></td>
+        <td><span>${formatColumn("paid_on", row)}</span></td>
+      </tr>`;
   };
 
   const noRows = `
-  <tr>
-    <td class="no-rows" colspan="7">
-      <span> No rows to show</span>
-    </td>
-  </tr>`;
+    <tr>
+      <td class="no-rows" colspan="7">
+        <span> No rows to show</span>
+      </td>
+    </tr>`;
 
   const loadingRows = `
-  <tr>
-    <td class="no-rows" colspan="7">
-      <i class="mdi spin">settings</i>&nbsp;<span>Loading... Please wait...</span>
-    </td>
-  </tr>`;
+    <tr>
+      <td class="no-rows" colspan="7">
+        <i class="mdi spin">settings</i>&nbsp;<span>Loading... Please wait...</span>
+      </td>
+    </tr>`;
 
   const table = document.querySelector("table");
   const tbody = table.querySelector("tbody");
+
+  function formatColumn(key, row) {
+    if (!row || !key) return "";
+    if (row[key] == null) return "";
+
+    switch (key) {
+      case "amount":
+        return formatAsCurrency(row[key]);
+
+      case "direction":
+        return row[key] === "I" ? "Income" : "Expense";
+
+      case "recur_type":
+        switch (row[key]) {
+          default:
+            return "";
+          case 0:
+            return "None";
+          case 1:
+            return "Monthly";
+          case 2:
+            return "Quarterly";
+          case 3:
+            return "Semi-annual";
+          case 4:
+            return "Yearly";
+        }
+      case "due_date":
+      case "paid_on":
+        return formatDate(row[key]);
+
+      default:
+        return row[key].toString();
+    }
+  }
+
+  function rowClasses(row) {
+    if (row.due_date < new Date()) return "past-due";
+    else return "";
+  }
 
   async function loadTableData() {
     tbody.innerHTML = loadingRows;
 
     try {
-      tableData = await fetch("/api/invoices").then((data) => data.json());
+      const movements = await fetch(
+        `/api/movements?month=${
+          currentDate.getMonth() + 1
+        }&year=${currentDate.getFullYear()}`
+      ).then((data) => data.json());
+
+      tableData = movements.data;
+
+      // Map the dates
+      tableData.forEach((row) => {
+        if (row.created_on) row.created_on = new Date(row.created_on);
+        if (row.due_date) row.due_date = new Date(row.due_date);
+        if (row.paid_on) row.paid_on = new Date(row.paid_on);
+      });
+
       tbody.innerHTML = tableData.length
         ? tableData.map(dataRow).join("")
         : noRows;
     } catch (e) {
       tbody.innerHTML = noRows;
       showToast(
-        `Failed to load invoices. ${e.message}`,
+        `Failed to load data. ${e.message}`,
         "Error",
         "danger",
         "cancel"
@@ -60,21 +116,29 @@ import {
   }
 
   async function loadChartData() {
-    const dataExpenses = [
-      ["Rent", 900],
-      ["Groceries", 650],
-      ["Food (out)", 250],
-      ["Health & Pharma", 5],
-      ["Education", 84 + 1.46 * 23 + 0], // Apoio Júlia + Almoço Francisco + Custos Júlia
-      ["Transport", 5 + 50 + 28], // Bolt + Uber + TUB
-      ["Utilities", 235], // Water + Electricity + Internet + TV
-      ["Leisure", 75 + 4.99 + 11 + 15], // Geral + Amazon Prime + Netflix + XBox
-      ["Taxes", 0.1 * 2200],
-      ["Company Cost", 15.35 + 42.3 + 9 + 10 + 6 + 16.85 + 84.22 + 28.7], // GSuite + Adobe + Copilot + Midjourney + DigitalOcean + B2B + BTCompliance + Contabilidade
-      ["Debts", 0],
-      ["Others", 0],
-    ];
-    const totalExpenses = dataExpenses.reduce((a, b) => a + b[1], 0);
+    const dataIncome = tableData
+      .filter((row) => row.direction === "I")
+      .map((row) => [row.category, row.amount])
+      .reduce((a, b) => {
+        a[b[0]] = a[b[0]] + b[1] || b[1];
+        return a;
+      }, {});
+
+    const dataExpenses = tableData
+      .filter((row) => row.direction === "E")
+      .map((row) => [row.category, row.amount])
+      .reduce((a, b) => {
+        a[b[0]] = a[b[0]] + b[1] || b[1];
+        return a;
+      }, {});
+
+    const totalExpenses = tableData
+      .filter((row) => row.direction === "E")
+      .reduce((a, b) => a + b.amount, 0);
+
+    const totalIncome = tableData
+      .filter((row) => row.direction === "I")
+      .reduce((a, b) => a + b.amount, 0);
 
     google.charts.load("current", {
       packages: ["corechart"],
@@ -88,19 +152,14 @@ import {
       var data = new google.visualization.DataTable();
       data.addColumn("string", "Category");
       data.addColumn("number", "Value");
-      data.addRows(dataExpenses);
+      data.addRows(Object.entries(dataExpenses));
 
       var options = {
         backgroundColor: "transparent",
-        legend: {
-          position: "right",
-          textStyle: {
-            color: "white",
-            fontName: "Raleway",
-            fontSize: 12,
-          },
-        },
-        title: "Expenses Jan/2024",
+        legend: "none",
+        title: `Expenses ${
+          monthNames[currentDate.getMonth()]
+        }/${currentDate.getFullYear()}`,
         titleTextStyle: {
           color: "white",
           fontName: "Raleway",
@@ -122,7 +181,7 @@ import {
           { label: "Amount", format: "currency", type: "number" },
           { role: "style" },
         ],
-        ["Income", 3300.0, "color: #008000"],
+        ["Income", totalIncome, "color: #008000"],
         ["Expenses", totalExpenses, "color: #ff0000"],
       ]);
 
@@ -147,71 +206,6 @@ import {
       );
       chart.draw(data, options);
     }
-  }
-
-  function rowIcon(row) {
-    let icon = "";
-
-    switch (row.status) {
-      case "C":
-        icon = "cancel";
-        break;
-
-      case "P":
-        icon = "print";
-        break;
-
-      case "S":
-        icon = "email";
-        break;
-
-      case "X":
-        icon = "check";
-        break;
-
-      default:
-        icon = "edit";
-        break;
-    }
-
-    if (new Date(row.due_date) < new Date() && !["C", "X"].includes(row.status))
-      icon = "warning";
-
-    return icon;
-  }
-
-  function formatColumn(key, row) {
-    switch (key) {
-      case "created":
-      case "due_date":
-      case "paid_on":
-        return row[key] ? formatDate(row[key]) : "";
-
-      case "status":
-        if (row[key] === "C") return "Cancelled";
-        if (row[key] === "P") return "Printed";
-        if (row[key] === "S") return "Sent";
-        if (row[key] === "X") return "Paid";
-
-        return "Draft";
-
-      case "value":
-        return formatAsCurrency(Number(row[key]));
-
-      default:
-        return row[key];
-    }
-  }
-
-  function formatRow(row) {
-    let css = [];
-
-    if (new Date(row.due_date) < new Date() && !["C", "X"].includes(row.status))
-      css.push("overdue");
-
-    if (row.status === "C") css.push("cancelled");
-
-    return css.join(" ");
   }
 
   function selectRow(tr) {
@@ -298,8 +292,8 @@ import {
   }
 
   // Initializing
-  // loadTableData();
-  loadChartData();
+  await loadTableData();
+  await loadChartData();
 
   // DOM Events
   document.querySelector("table").addEventListener("click", (e) => {
@@ -313,4 +307,14 @@ import {
   document
     .querySelector(".toolbar")
     .addEventListener("click", toolbarButtonClickHandler);
+
+  document
+    .querySelector("ez-calendar")
+    .addEventListener("calendarchange", async (e) => {
+      currentDate.setFullYear(e.detail.year);
+      currentDate.setMonth(e.detail.month);
+
+      await loadTableData();
+      await loadChartData();
+    });
 })();

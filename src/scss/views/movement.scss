@@ -6,6 +6,7 @@
   display: grid;
   grid-template-rows: min-content min-content min-content auto min-content;
   gap: 4px;
+  overflow: hidden;
 
   hr {
     width: 100%;

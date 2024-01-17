@@ -1,0 +1,233 @@
+.columns {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+}
+.columns .col {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.form-group {
+  display: grid;
+  gap: 3px;
+  align-items: center;
+}
+.form-group input[type=text],
+.form-group input[type=number],
+.form-group input[type=email],
+.form-group input[type=date],
+.form-group textarea,
+.form-group select {
+  padding: 4px 8px;
+  min-height: 29px;
+  border: var(--sl-input-border-width) solid var(--sl-input-border-color);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) background-color;
+}
+.form-group input[type=text].is-invalid,
+.form-group input[type=number].is-invalid,
+.form-group input[type=email].is-invalid,
+.form-group input[type=date].is-invalid,
+.form-group textarea.is-invalid,
+.form-group select.is-invalid {
+  border-color: var(--sl-color-danger-600);
+}
+
+.checkbox {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 3px;
+}
+.checkbox input[type=checkbox] {
+  margin: 6px 0 7px 0;
+}
+.checkbox .form-group {
+  align-content: start;
+  justify-content: start;
+  grid-auto-flow: column;
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  justify-content: end;
+}
+
+.columns {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+}
+
+.columns .col {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.form-group {
+  display: grid;
+  gap: 3px;
+  align-items: center;
+}
+
+.form-group input[type=text],
+.form-group input[type=number],
+.form-group input[type=email],
+.form-group input[type=date],
+.form-group textarea,
+.form-group select {
+  padding: 4px 8px;
+  min-height: 29px;
+  border: var(--sl-input-border-width) solid var(--sl-input-border-color);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) background-color;
+}
+
+.form-group input[type=text].is-invalid,
+.form-group input[type=number].is-invalid,
+.form-group input[type=email].is-invalid,
+.form-group input[type=date].is-invalid,
+.form-group textarea.is-invalid,
+.form-group select.is-invalid {
+  border-color: var(--sl-color-danger-600);
+}
+
+.checkbox {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 3px;
+}
+
+.checkbox input[type=checkbox] {
+  margin: 6px 0 7px 0;
+}
+
+.checkbox .form-group {
+  align-content: start;
+  justify-content: start;
+  grid-auto-flow: column;
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  justify-content: end;
+}
+
+.table-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 4px;
+  grid-template-rows: min-content 1fr min-content;
+}
+.table-container .toolbar,
+.table-container .pagination {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  padding: 4px;
+  background-color: var(--sl-color-sky-100);
+  border-radius: 6px;
+}
+.table-container .toolbar {
+  justify-content: start;
+}
+.table-container .toolbar sl-button {
+  padding: 0.15rem;
+}
+.table-container .pagination {
+  align-items: center;
+}
+.table-container .pagination input[type=number],
+.table-container .pagination select {
+  width: 70px;
+  padding: 4px 8px;
+  min-height: 29px;
+  border: var(--sl-input-border-width) solid var(--sl-input-border-color);
+  border-radius: var(--sl-input-border-radius-medium);
+  font-size: var(--sl-input-font-size-medium);
+  transition: var(--sl-transition-fast) color, var(--sl-transition-fast) border, var(--sl-transition-fast) box-shadow, var(--sl-transition-fast) background-color;
+}
+.table-container .pagination .pageinfo {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.table-container .table {
+  height: 100%;
+  overflow: auto;
+  scroll-behavior: smooth;
+  border-radius: 8px;
+}
+.table-container .table th {
+  position: sticky;
+  top: 0;
+}
+.table-container .table table {
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  border-spacing: 1px;
+  border-collapse: separate;
+  position: relative;
+}
+.table-container .table table thead tr th {
+  background-color: var(--sl-color-teal-50);
+  background: linear-gradient(0deg, var(--sl-color-teal-50) 0%, var(--sl-color-teal-200) 100%);
+  padding: 0.5rem 1rem;
+}
+.table-container .table table tbody tr:nth-child(odd) td {
+  background-color: var(--sl-color-gray-100);
+}
+.table-container .table table tbody tr.selected td {
+  background-color: var(--sl-color-gray-400);
+}
+.table-container .table table tbody tr.cancelled {
+  opacity: 0.3;
+}
+.table-container .table table tbody tr.cancelled td {
+  background-color: inherit;
+  color: inherit;
+}
+.table-container .table table tbody tr:hover td {
+  background-color: var(--sl-color-gray-200);
+  cursor: pointer;
+}
+.table-container .table table tbody tr.past-due td {
+  background-color: var(--sl-color-danger-500);
+}
+.table-container .table table tbody tr.past-due:hover td {
+  background-color: var(--sl-color-danger-700);
+}
+.table-container .table table tbody tr td {
+  padding: 0.5rem 1rem;
+}
+.table-container .table table tbody tr td.no-rows span {
+  justify-content: center;
+}
+.table-container .table table tbody tr td.no-rows i {
+  position: relative;
+  top: 3px;
+  animation: spin 2s linear infinite;
+}
+
+.content {
+  padding: 1rem;
+  display: grid;
+  grid-template-rows: min-content min-content min-content auto min-content;
+  gap: 4px;
+  overflow: hidden;
+}
+.content hr {
+  width: 100%;
+}
