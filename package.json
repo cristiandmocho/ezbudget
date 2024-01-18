@@ -5,9 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "scss-compile": "sass --no-source-map --update scss/:public/css/ --watch",
-    "start": "node server.js",
-    "start:dev": "node --watch-path=./ server.js"
+    "scss-compile": "sass --no-source-map --update src/scss/:src/public/css/ --watch",
+    "start": "node ./src/server.js",
+    "start:dev": "node --watch ./src/server.js --watch-path=./src/controller --watch-path=./src/middleware --watch-path=./src/routes --watch-path=./src/utils --watch-path=./src/views"
   },
   "author": {
     "email": "cristian.mocho@ezsystems.net",

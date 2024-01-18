@@ -8,7 +8,7 @@ import { LRUCache } from "lru-cache";
 
 import { PrivateRoutes, PublicRoutes, APIRoutes } from "./routes/index.js";
 import registerErrorHandler from "./middleware/errorhandling.js";
-import Package from "./package.json" assert { type: "json" };
+import Package from "../package.json" assert { type: "json" };
 
 import pkg from "express-openid-connect";
 import MySQL from "./utils/mysql.js";
